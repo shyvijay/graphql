@@ -8,13 +8,14 @@ function App() {
   let [repoList, setRepoList] = useState(null);
   let [pageCount, setPageCount] = useState(10);
   let [queryString, setQueryString] = useState("slides");
-  let [totalCount, setTotalCount] = useState("slides");
+  let [totalCount, setTotalCount] = useState(null);
 
   const fetchData = useCallback(() => {
+    const queryText = JSON.stringify(query);
     fetch(github.baseURL, {
       method: "POST",
       headers: github.headers,
-      body: JSON.stringify(query),
+      body: queryText,
     })
       .then((response) => response.json())
       .then((data) => {
